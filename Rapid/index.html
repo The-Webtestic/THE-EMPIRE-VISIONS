@@ -625,62 +625,75 @@
               <p>Get In Touch</p>
               <!--  -->
               <form id="contactForm" method="post" role="form">
+
                 <div class="form-group mb-4">
-                  <label for="fee" class="text-white">Price</label>
-                  <select id="fee" name="fee" onchange="updatePaymentButton();" required>
-                    <option value="">Select Price</option>
-                    <option value="10,000">10,000 rupees</option>
-                    <option value="20,000">20,000 rupees</option>
-                    <option value="30,000">30,000 rupees</option>
-                  </select>
+                    <label for="fee" class="text-white">Price</label>
+                    <select id="fee" name="fee" onchange="updatePaymentButton();" required
+                        style="width: 100%; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: 0.25rem;">
+                        <option value="">Select Price</option>
+                        <option value="10,000">10,000 rupees</option>
+                        <option value="20,000">20,000 rupees</option>
+                        <option value="30,000">30,000 rupees</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
                 <div class="form-group mt-3">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
                 </div>
                 <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                 </div>
-
+            
                 <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                    <div class="loading" style="display:none;">Loading</div>
+                    <div class="error-message" style="display:none;"></div>
+                    <div class="sent-message" style="display:none;">Your message has been sent. Thank you!</div>
                 </div>
-
-                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
-              </form>
-
-              <script>
+                <div class="text-center">
+                  <button type="submit" title="Send Message" style="background: #1bb1dc; border: 0; border-radius: 3px; padding: 8px 30px; color: #fff; transition: 0.3s;">
+                      Send Message
+                  </button>
+              </div>
+              
+            </form>
+            
+            <script>
                 document.getElementById('contactForm').addEventListener('submit', function (event) {
-                  event.preventDefault(); 
-                  document.querySelector('.loading').style.display = 'block';
-
-          
-                  const fee = document.getElementById('fee').value;
-                  const name = document.getElementById('name').value;
-                  const email = document.getElementById('email').value;
-                  const subject = document.getElementById('subject').value;
-                  const message = document.querySelector('textarea[name="message"]').value;
-
-                  
-                  const whatsappMessage = `Price: ${fee}\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
-                  const encodedMessage = encodeURIComponent(whatsappMessage);
-                  const phoneNumber = '919810803154';
-
-                  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-                  window.open(whatsappURL, '_blank');
-
-                  document.querySelector('.loading').style.display = 'none';
-                  document.querySelector('.sent-message').style.display = 'block';
+                    event.preventDefault();
+                    document.querySelector('.loading').style.display = 'block';
+                    document.querySelector('.error-message').style.display = 'none';
+                    document.querySelector('.sent-message').style.display = 'none';
+            
+                    const fee = document.getElementById('fee').value;
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.querySelector('textarea[name="message"]').value;
+            
+                    if (!fee || !name || !email || !subject || !message) {
+                        document.querySelector('.loading').style.display = 'none';
+                        document.querySelector('.error-message').style.display = 'block';
+                        document.querySelector('.error-message').textContent = 'Please fill in all required fields.';
+                        return;
+                    }
+            
+                    const whatsappMessage = `Price: ${fee}\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const phoneNumber = '919810803154';
+            
+                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+                    window.open(whatsappURL, '_blank');
+            
+                    document.querySelector('.loading').style.display = 'none';
+                    document.querySelector('.sent-message').style.display = 'block';
                 });
-              </script>
+            </script>            
             </div>
           </div>
         </div>
